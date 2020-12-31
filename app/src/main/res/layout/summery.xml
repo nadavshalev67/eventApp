@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/d_1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eventbeck"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/summry_head"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Summery"
+        android:textColor="#E30505"
+        android:textSize="56sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="113dp">
+
+        <LinearLayout
+            android:id="@+id/e"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/myevent_textview"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:text="My Event"
+                android:textColor="#020202"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/myevent_edittext"
+                android:layout_width="144dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:text="12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/a"
+            android:layout_width="142dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/e"
+            android:layout_marginLeft="165dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/approved_textview"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:text="Approved"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/approved_edittext"
+                android:layout_width="142dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:text="12"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/r"
+            android:layout_width="142dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/a"
+            android:layout_marginLeft="152dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/rejected_textView"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:text="Rejected"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/rejected_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:text="12" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="353dp"
+        android:layout_height="197dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TotalProfit_textview"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Total Profit From Your Events "
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/TotalProfit_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="12" />
+
+        <TextView
+            android:id="@+id/TotalApproved_textView"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Total Profit From Approved Events"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/TotalApproved_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="12" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Max_event"
+            android:layout_width="238dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="Maximum Event By User :"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/eventNum_edittext"
+            android:layout_width="92dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/Max_event"
+            android:layout_marginLeft="242dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/summery_emailTextview"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="User :"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/summery_emailedittext"
+            android:layout_width="292dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/summery_emailTextview"
+            android:layout_marginLeft="115dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/eventProfit_textview"
+            android:layout_width="326dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Maximum Total Profit Events By User :"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/eventProfit_edittext"
+            android:layout_width="105dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/eventProfit_textview"
+            android:layout_marginLeft="303dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/TotalProfit_userTextview"
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="User :"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/TotalProfit_userEdittext"
+            android:layout_width="292dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/TotalProfit_userTextview"
+            android:layout_marginLeft="116dp"
+            android:ems="10" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/levelofrisk_summery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Level Of Risk - Events Summery"
+            android:textColor="#BF0707"
+            android:textSize="21sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp">
+
+        <LinearLayout
+            android:id="@+id/ezey_c"
+            android:layout_width="143dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/esey_textviewt"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Esey"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/esey_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:text="12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hard_c"
+            android:layout_width="143dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/meidum_c"
+            android:layout_marginLeft="158dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hard_textView"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Hard"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:text="12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/meidum_c"
+            android:layout_width="143dp"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/ezey_c"
+            android:layout_marginLeft="157dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/medium_textview"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Medium"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/medium_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:text="12" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

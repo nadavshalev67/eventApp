@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingTop="1dp"
+    android:paddingRight="1dp"
+    android:paddingBottom="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/userEmailComment"
+                android:layout_width="152dp"
+                android:layout_height="wrap_content"
+                android:text="MediumText"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/contentComment"
+                android:layout_width="152dp"
+                android:layout_height="wrap_content"
+                android:text="MediumText"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#3F51B5"
+                android:textSize="16sp"
+                android:typeface="sans" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/delete_comment_btn"
+            android:layout_width="46dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/deletebutton" />
+
+    </LinearLayout>
+
+</LinearLayout>

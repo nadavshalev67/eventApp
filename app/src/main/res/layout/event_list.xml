@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="399dp"
+        android:layout_height="299dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49">
+
+        <LinearLayout
+            android:layout_width="177dp"
+            android:layout_height="170dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/eventPic"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="218dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/listbeack"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/eventType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:text="eventType"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/eventDesc"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:paddingLeft="5dp"
+                android:text="Description"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/eventAddress"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="5dp"
+                android:text="Address"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <Spinner
+                android:id="@+id/lavalOfdanger"
+                android:layout_width="match_parent"
+                android:layout_height="38dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/bth_allComment"
+                    android:layout_width="54dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/comment" />
+
+                <ImageButton
+                    android:id="@+id/bth_addCommrnt"
+                    android:layout_width="54dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/addcomment" />
+
+                <ImageButton
+                    android:id="@+id/bth_coin"
+                    android:layout_width="51dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/coin" />
+
+                <EditText
+                    android:id="@+id/coin_count"
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="176dp"
+            android:layout_height="123dp"
+            android:layout_marginTop="174dp"
+            android:background="@drawable/listbeack">
+
+            <ImageButton
+                android:id="@+id/bth_approve_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/approve" />
+
+            <ImageButton
+                android:id="@+id/bth_disapprove_user"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginLeft="90dp"
+                app:srcCompat="@drawable/disapprove" />
+
+            <EditText
+                android:id="@+id/approve_count_user"
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/bth_approve_user"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="-51dp"
+                android:ems="10"
+                android:gravity="center"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/disaprove_count"
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/bth_disapprove_user"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginBottom="-51dp"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

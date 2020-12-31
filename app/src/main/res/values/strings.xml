@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">eventApp</string>
+    <string name="welcome_to_your_event_app">Welcome To Your Event App</string>
+    <string name="comments_main">comments</string>
+    <string name="log_out_main">Log Out</string>
+    <string name="summery_main">Summery</string>
+    <string name="events_main">Events</string>
+    <string name="event_type_add">event Type</string>
+    <string name="desc_add">Description</string>
+    <string name="description_add">Description</string>
+    <string name="event_address_add">event Address</string>
+    <string name="level_of_risk_add">Level of risk</string>
+    <string name="add_event">Add Event</string>
+    <string name="add_bth">Add</string>
+    <string-array name="Danger_level">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_comment">add Comment</string>
+    <string name="comment">Please Write Your Comment:</string>
+    <string name="add_comment_add">Add Comment</string>
+    <string name="sign_in">Sign_in</string>
+    <string name="signup">SignUp</string>
+    <string name="sign_account">sign in to your account</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sign_in_bth">Sign_in</string>
+    <string name="edit_event">Edit</string>
+    <string name="name_edit">Name</string>
+    <string name="description_edit">Description</string>
+    <string name="price_edit">Price</string>
+    <string name="address_edit">Address_edit</string>
+    <string name="address_edite">Address</string>
+    <string name="type_of_event_edit">Type Of Event</string>
+    <string name="level_of_risk_edit">Level Of Risk</string>
+    <string name="save_bth_edit">Save</string>
+    <string name="mediumtext_c">MediumText</string>
+</resources>
