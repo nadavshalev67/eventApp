@@ -8,6 +8,8 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
+        multiDexEnabled true
+
         applicationId "com.example.eventapp"
         minSdkVersion 16
         targetSdkVersion 29
@@ -30,7 +32,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.firebase:firebase-analytics'
