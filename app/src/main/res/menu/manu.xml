@@ -31,6 +31,16 @@
         android:title="Approved events"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/app_bar_Comments"
+        android:title="Comments"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/app_bar_Summery"
+        android:title="Summery"
+        app:showAsAction="ifRoom" />
+
 
 
 </menu>
