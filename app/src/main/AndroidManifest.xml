@@ -3,6 +3,8 @@
     package="com.example.eventapp">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,16 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EventApp">
         <activity android:name=".eventMain" />
-        <activity android:name=".UserActivity">
 
-        </activity>
-        <activity android:name=".AddEventActivity">
+        <activity android:name=".UserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity android:name=".AddEventActivity">
 
         </activity>
 
