@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +19,17 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
+
+
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AddEventActivity extends Activity implements View.OnClickListener {
@@ -97,7 +110,6 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
                 String eventName;
                 String eventDescription;
                 String emailAdd;
-                String levelOfRisk;
                 String spinner;
 
                 if (TextUtils.isEmpty(mEventName.getText().toString())) {
@@ -126,6 +138,21 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
                     return;
                 }
 
+                Firestore db = FirestoreClient.getFirestore();
+                Bitmap bm=((BitmapDrawable)mImageDescription.getDrawable()).getBitmap();
+                String base64 = convertPicture(bm);
+
+                DocumentReference docRef = db.collection("event").document();
+                Map<String, String> data = new HashMap<>();
+                data.put("event_name" , eventName );
+                data.put("event_description" , eventDescription );
+                data.put("email_address " , emailAdd );
+                data.put("level_of_ " , spin );
+                data.put("picture" ,base64 );
+
+                 docRef.set(data);
+
+
                 break;
             }
             case R.id.addPicBtn: {
@@ -148,4 +175,15 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
+
+    private String convertPicture(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+
 }
+
+

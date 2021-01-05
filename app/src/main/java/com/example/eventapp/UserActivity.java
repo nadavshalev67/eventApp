@@ -82,6 +82,7 @@ public class UserActivity extends AppCompatActivity {
                 Toast.makeText(UserActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
             }
             else{
+              
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(UserActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
