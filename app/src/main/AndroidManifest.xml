@@ -15,8 +15,7 @@
         android:theme="@style/Theme.EventApp">
         <activity android:name=".eventMain" />
 
-        <activity android:name=".UserActivity">
-        </activity>
+        <activity android:name=".UserActivity"></activity>
 
         <activity android:name=".AddEventActivity">
             <intent-filter>

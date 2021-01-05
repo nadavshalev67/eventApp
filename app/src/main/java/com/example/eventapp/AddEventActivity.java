@@ -21,11 +21,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.cloud.FirestoreClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+
+import com.google.firebase.firestore.DocumentReference;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
@@ -138,24 +141,37 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
                     return;
                 }
 
-                Firestore db = FirestoreClient.getFirestore();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
                 Bitmap bm=((BitmapDrawable)mImageDescription.getDrawable()).getBitmap();
                 String base64 = convertPicture(bm);
 
                 DocumentReference docRef = db.collection("event").document();
                 Map<String, String> data = new HashMap<>();
                 data.put("event_name" , eventName );
+                data.put("approved_count","0");
+                data.put("rejected_count","0");
+                data.put("userId", FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 data.put("event_description" , eventDescription );
-                data.put("email_address " , emailAdd );
-                data.put("level_of_ " , spin );
+                data.put("event_address " , emailAdd );
+                data.put("level_of " , spin );
                 data.put("picture" ,base64 );
 
-                 docRef.set(data);
+                 docRef.set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                     @Override
+                     public void onComplete(@NonNull Task<Void> task) {
+                         Toast.makeText(AddEventActivity.this, "sucsses", Toast.LENGTH_SHORT).show();
+                     }
+                 }).addOnFailureListener(new OnFailureListener() {
+                     @Override
+                     public void onFailure(@NonNull Exception e) {
+                         Toast.makeText(AddEventActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                     }
+                 });
 
 
                 break;
             }
-            case R.id.addPicBtn: {
+            case R.id.AddPicBtn: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
