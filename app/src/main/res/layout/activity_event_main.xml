@@ -3,65 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/eventbeck"
     android:orientation="vertical">
-
-
-    <TextView
-        android:id="@+id/Welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:textSize="40dp"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:text="@string/welcome_to_your_event_app"
-        android:gravity="center_horizontal" />
-
-    <Button
-        android:id="@+id/bth_event"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="@string/events_main"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:backgroundTint="#086CC3"
-        app:cornerRadius="30dp" />
-
-    <Button
-        android:id="@+id/bth_Summery"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="@string/summery_main"
-        android:textSize="24sp"
-        app:backgroundTint="#086CC3"
-        app:cornerRadius="30dp" />
-
-    <Button
-        android:id="@+id/bth_comments"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="@string/comments_main"
-        android:textSize="24sp"
-        app:backgroundTint="#086CC3"
-        app:cornerRadius="30dp" />
-
-    <Button
-        android:id="@+id/bth_logOut"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/caveat_brush"
-        android:text="@string/log_out_main"
-        android:textSize="30sp"
-        app:backgroundTint="#000000"
-        app:cornerRadius="30dp" />
 
 </LinearLayout>
