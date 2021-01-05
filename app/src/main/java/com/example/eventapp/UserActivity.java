@@ -44,7 +44,7 @@ public class UserActivity extends AppCompatActivity {
     private View.OnClickListener singInUserListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String email = emailEditText.getText().toString();
+            String email = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString();
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(UserActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
