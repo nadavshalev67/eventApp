@@ -1,4 +1,4 @@
-package com.example.eventapp;
+package com.example.eventapp.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -9,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,21 +20,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.eventapp.R;
+import com.example.eventapp.database.firestore.FireStoreSql;
+import com.example.eventapp.database.SQLHolder;
+import com.example.eventapp.models.Event;
+import com.example.eventapp.utitlities.Utilities;
 
 
-import com.google.firebase.firestore.DocumentReference;
-
-import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-
-public class AddEventActivity extends Activity implements View.OnClickListener {
+public class AddEventActivity extends Activity implements View.OnClickListener, FireStoreSql.SqlListener {
     private ImageView mAddPicBtn, mImageDescription;
     private EditText mEventName, mEventDesc, mEventAddress;
     private Spinner mLevelOfRiskSpinnner;
@@ -112,8 +104,8 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
             case R.id.addBtn: {
                 String eventName;
                 String eventDescription;
-                String emailAdd;
-                String spinner;
+                String eventAdress;
+                String levelOfRisk = mLevelOfRiskSpinnner.getSelectedItem().toString();
 
                 if (TextUtils.isEmpty(mEventName.getText().toString())) {
                     Toast.makeText(AddEventActivity.this, "please enter name", Toast.LENGTH_LONG).show();
@@ -131,9 +123,7 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(AddEventActivity.this, "please enter email", Toast.LENGTH_LONG).show();
                     return;
                 }
-                emailAdd = mEventAddress.getText().toString();
-
-                String spin = mLevelOfRiskSpinnner.getSelectedItem().toString();
+                eventAdress = mEventAddress.getText().toString();
 
 
                 if (!mIsImageSeted) {
@@ -141,34 +131,9 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
                     return;
                 }
 
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                Bitmap bm=((BitmapDrawable)mImageDescription.getDrawable()).getBitmap();
-                String base64 = convertPicture(bm);
-
-                DocumentReference docRef = db.collection("event").document();
-                Map<String, String> data = new HashMap<>();
-                data.put("event_name" , eventName );
-                data.put("approved_count","0");
-                data.put("rejected_count","0");
-                data.put("userId", FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                data.put("event_description" , eventDescription );
-                data.put("event_address " , emailAdd );
-                data.put("level_of " , spin );
-                data.put("picture" ,base64 );
-
-                 docRef.set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
-                     @Override
-                     public void onComplete(@NonNull Task<Void> task) {
-                         Toast.makeText(AddEventActivity.this, "sucsses", Toast.LENGTH_SHORT).show();
-                     }
-                 }).addOnFailureListener(new OnFailureListener() {
-                     @Override
-                     public void onFailure(@NonNull Exception e) {
-                         Toast.makeText(AddEventActivity.this, "failed", Toast.LENGTH_SHORT).show();
-                     }
-                 });
-
-
+                Bitmap bm = ((BitmapDrawable) mImageDescription.getDrawable()).getBitmap();
+                Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, Utilities.convertBitMapToString(bm), Utilities.getUUID());
+                SQLHolder.getInstance().insertEvent(event, this);
                 break;
             }
             case R.id.AddPicBtn: {
@@ -192,14 +157,17 @@ public class AddEventActivity extends Activity implements View.OnClickListener {
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
 
-    private String convertPicture(Bitmap bitmap){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream .toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+    @Override
+    public void onCompleteListener() {
+        Toast.makeText(AddEventActivity.this, "Event added", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
-
+    @Override
+    public void onFailedListener(Exception e) {
+        Toast.makeText(AddEventActivity.this, "Failed to upload event", Toast.LENGTH_SHORT).show();
+    }
 }
 
 

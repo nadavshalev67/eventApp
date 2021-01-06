@@ -1,4 +1,4 @@
-package com.example.eventapp;
+package com.example.eventapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eventapp.R;
+import com.example.eventapp.utitlities.Utilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class UserActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button singInBtn;
@@ -29,6 +31,7 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_activity);
+        Utilities.setAppContext(getBaseContext());
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -47,10 +50,10 @@ public class UserActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString();
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(UserActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
             } else {
                 mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(UserActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -61,7 +64,7 @@ public class UserActivity extends AppCompatActivity {
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     //Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(UserActivity.this, "Authentication failed.",
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                     //updateUI(null);
                                 }
@@ -79,12 +82,11 @@ public class UserActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(UserActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
-            }
-            else{
-              
+                Toast.makeText(LoginActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
+            } else {
+
                 mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(UserActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -93,7 +95,7 @@ public class UserActivity extends AppCompatActivity {
                                     updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(UserActivity.this, "Authentication failed.",
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                     //updateUI(null);
                                 }
@@ -106,10 +108,8 @@ public class UserActivity extends AppCompatActivity {
     };
 
     private void updateUI(FirebaseUser user) {
-        if(user!=null){
-            //CitiesDataBaseManager.getInstance().openDataBase(this);
-            Intent intent = new Intent(this, eventMain.class);
-            //  intent.putExtra("user_name", user.getEmail());
+        if (user != null) {
+            Intent intent = new Intent(this, EventListActivity.class);
             startActivity(intent);
             finish();
         }
