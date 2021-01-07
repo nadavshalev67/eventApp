@@ -1,4 +1,4 @@
-package com.example.eventapp;
+package com.example.eventapp.recyclerview;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eventapp.R;
 import com.example.eventapp.activities.AddEventActivity;
 import com.example.eventapp.database.SQLHolder;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.utitlities.Utilities;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -96,6 +96,8 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
                         SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 3);
                         if (event.approved_users_list.size() == 5) {
                             SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 10);
+                        } else if (event.approved_users_list.size() > 5) {
+                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 2);
                         }
                         notifyDataSetChanged();
                     }
