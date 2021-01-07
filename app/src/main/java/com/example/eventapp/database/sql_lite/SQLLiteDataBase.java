@@ -19,8 +19,9 @@ public class SQLLiteDataBase extends SQLBase {
         sqLiteDB = new SQLiteDB(context);
     }
 
+
     @Override
-    public void updateApprovedUser(String id_document, List<String> approvedUser) {
+    public void updateApprovedUser(Event enent, String uuidOfUserApproved) {
 
     }
 
@@ -29,10 +30,6 @@ public class SQLLiteDataBase extends SQLBase {
 
     }
 
-    @Override
-    public void updateCurrencyForUser(String uuid, int i) {
-
-    }
 
     @Override
     public void removeEvent(String id_document) {
@@ -44,11 +41,11 @@ public class SQLLiteDataBase extends SQLBase {
 
     }
 
-
     @Override
-    public void insertEvent(Event event, SqlListener sqlListener) {
+    public void insertEvent(String createdBy, Event event, SqlListener sqlListener) {
 
     }
+
 
     @Override
     public void getAllEvents(SqlListenerEvents sqlListenerEvents) {
