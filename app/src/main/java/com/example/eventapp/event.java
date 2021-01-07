@@ -16,6 +16,7 @@ public class event {
 
     private ArrayList<String> ApprovalArray ;
     private ArrayList<String> disApprovlArray;
+    private Boolean DeletedVald;
 
     public event() {
         this.ID = UUID.randomUUID().toString() ;
@@ -25,7 +26,7 @@ public class event {
     }
 
     public event(String ID, String eventType, String pic, String description, String address,
-                 String level_of_risk, String ownerEmail) {
+                 String level_of_risk, String ownerEmail,Boolean deletedVald) {
         setID(ID);
         setEventType(eventType);
         setPic(pic);
@@ -33,6 +34,7 @@ public class event {
         setAddress(address);
         setLevelofrisk(Levelofrisk);
         setOwnerEmail(ownerEmail);
+        setDeletedVald(deletedVald);
 
     }
 
@@ -91,7 +93,16 @@ public class event {
     public void setOwnerEmail(String ownerEmail) {
         this.ownerEmail = ownerEmail;
     }
-//ApprovalArray-----------------------------------------------------------------
+
+    public Boolean getDeletedVald() {
+        return DeletedVald;
+    }
+
+    public void setDeletedVald(Boolean deletedVald) {
+        DeletedVald = deletedVald;
+    }
+
+    //ApprovalArray-----------------------------------------------------------------
     public ArrayList<String> getApprovalArray() {
         return ApprovalArray;
     }
@@ -99,6 +110,7 @@ public class event {
     public void setApprovalArray(ArrayList<String> approvalArray) {
         this.ApprovalArray = approvalArray;
     }
+
     public void addToApprovalArrayList(String email) {
         ApprovalArray.add(email);
     }

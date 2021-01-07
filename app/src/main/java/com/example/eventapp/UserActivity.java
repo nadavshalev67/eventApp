@@ -107,7 +107,7 @@ public class UserActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if(user!=null){
             //CitiesDataBaseManager.getInstance().openDataBase(this);
-            Intent intent = new Intent(this, eventMain.class);
+            Intent intent = new Intent(this,UserActivity .class);
             //  intent.putExtra("user_name", user.getEmail());
             startActivity(intent);
             finish();

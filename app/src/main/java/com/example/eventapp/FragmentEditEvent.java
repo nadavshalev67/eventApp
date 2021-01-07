@@ -1,6 +1,9 @@
 package com.example.eventapp;
 
-import androidx.fragment.app.Fragment;
 
-public class FragmentEditEvent extends Fragment {
-}
+import androidx.fragment.app.DialogFragment;
+
+public class FragmentEditEvent extends DialogFragment {
+
+
+        }

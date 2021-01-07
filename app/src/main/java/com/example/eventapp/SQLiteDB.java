@@ -33,6 +33,9 @@ public class SQLiteDB extends SQLiteOpenHelper {
     private static final String COMMENT_COLUMN_CONTENT = "content";
     private static final String COMMENT_COLUMN_USEREMAIL = "userEmail";
 
+    //users table
+
+
     private static final String[] TABLE_EVENT_COLUMNS = {EVENT_COLUMNS_SERIALNUM,EVENT_COLUMN_EVENTTYPE,
             EVENT_COLUMN_IMAGE ,EVENT_COLUMN_DESCRIPTION,EVENT_COLUMN_ADDRESS,EVENT_COLUMN_LEVELOFRISK,
             EVENT_COLUMN_EMAIL};
@@ -67,6 +70,7 @@ public class SQLiteDB extends SQLiteOpenHelper {
                     + EVENT_COLUMN_ADDRESS + " TEXT, "
                     + EVENT_COLUMN_LEVELOFRISK + " TEXT, "
                     + EVENT_COLUMN_EMAIL + " TEXT) ";
+
             db.execSQL(CREATE_ITEM_TABLE);
 
             // SQL statement to create item table
@@ -105,6 +109,7 @@ public class SQLiteDB extends SQLiteOpenHelper {
             values.put(EVENT_COLUMN_ADDRESS, item.getAddress());
             values.put(EVENT_COLUMN_LEVELOFRISK, item.getLevelofrisk());
             values.put(EVENT_COLUMN_EMAIL, item.getOwnerEmail());
+
 
             //insert item
             db.insert(TABLE_EVENT_NAME, null, values);
