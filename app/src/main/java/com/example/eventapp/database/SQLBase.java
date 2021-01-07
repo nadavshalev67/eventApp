@@ -14,6 +14,8 @@ public abstract class SQLBase {
 
     public abstract void updateApprovedUser(Event enent, String uuidOfUserApproved);
 
+    public abstract void getAllUsers(SqlListenerUsers listener);
+
     public abstract void updateRejectedUser(String id_document, List<String> rejectedUser);
 
     //public abstract void updateCurrencyForUser(String uuid, int i);
@@ -31,6 +33,10 @@ public abstract class SQLBase {
 
     public interface SqlListenerEvents {
         void onGetAllEvents(List<Event> events);
+    }
+
+    public interface SqlListenerUsers {
+        void onGetAllUsers(List<User> users);
     }
 
     protected Context mContext;

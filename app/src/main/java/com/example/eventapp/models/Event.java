@@ -50,7 +50,7 @@ public class Event implements Serializable {
         List<String> approved_users_list = (List<String>) values.get("approved_users_list");
         String event_description = (String) values.get("event_description");
         String event_name = (String) values.get("event_name");
-        String level_of_risk = (String) values.get("event_adress");
+        String level_of_risk = (String) values.get("level_of_risk");
         String url_of_pitcure = (String) values.get("url_of_pitcure");
         List<String> rejected_users_list = (List<String>) values.get("rejected_users_list");
         String user_id = (String) values.get("user_id");

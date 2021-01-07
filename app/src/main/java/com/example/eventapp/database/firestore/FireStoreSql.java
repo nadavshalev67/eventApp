@@ -1,7 +1,6 @@
 package com.example.eventapp.database.firestore;
 
 import android.content.Context;
-import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
@@ -77,6 +76,26 @@ public class FireStoreSql extends SQLBase {
                         });
                     }
                 });
+            }
+        });
+    }
+
+    @Override
+    public void getAllUsers(SqlListenerUsers listener) {
+        mDB.collection(USER_TABLE_NAME).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                List<User> users = new ArrayList<>();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        users.add(User.fromDocument(document));
+                    }
+                    if (listener != null) {
+                        listener.onGetAllUsers(users);
+                    }
+                } else {
+                    //Log.w(TAG, "Error getting documents.", task.getException());
+                }
             }
         });
     }
