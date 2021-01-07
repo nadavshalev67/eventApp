@@ -150,10 +150,6 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
                 byte[] data = baos.toByteArray();
                 StorageReference mountainImagesRef = mStorageRef.child(String.valueOf(mImageDescription.hashCode()));
                 UploadTask uploadTask = mountainImagesRef.putBytes(data);
-
-
-
-
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {

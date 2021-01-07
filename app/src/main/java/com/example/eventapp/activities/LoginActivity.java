@@ -18,10 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
     private Button singInBtn;
     private TextView createNewAccountBtn;
     private EditText emailEditText;
@@ -31,12 +32,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_activity);
+        mAuth = FirebaseAuth.getInstance();
         Utilities.setAppContext(getBaseContext());
-        // Initialize Firebase Auth
         initViews();
-
         createNewAccountBtn.setOnClickListener(this);
         singInBtn.setOnClickListener(this);
+
     }
 
     private void initViews() {
@@ -47,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             Intent intent = new Intent(this, EventListActivity.class);
@@ -56,21 +56,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
 
-
     @Override
     public void onClick(View view) {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString();
         switch (view.getId()) {
             case R.id.sign_in_btn: {
-                String email = emailEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString();
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
                 } else {
@@ -98,8 +97,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             }
             case R.id.SignUp: {
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please Enter email and password", Toast.LENGTH_SHORT).show();
                 } else {

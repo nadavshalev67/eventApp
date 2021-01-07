@@ -12,6 +12,8 @@ public abstract class SQLBase {
     protected String EVENT_TABLE_NAME = "event";
     protected String USER_TABLE_NAME = "Users";
 
+    public abstract void updateApprovedUser(String id_document, List<String> approvedUser);
+
     public interface SqlListener {
         void onCompleteListener();
 
@@ -33,5 +35,6 @@ public abstract class SQLBase {
     public SQLBase(Context context) {
         this.mContext = context;
     }
+
 
 }

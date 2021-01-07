@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FireStoreSql extends SQLBase {
 
@@ -27,6 +28,24 @@ public class FireStoreSql extends SQLBase {
     public FireStoreSql(Context context) {
         super(context);
         mDB = FirebaseFirestore.getInstance();
+    }
+
+
+    @Override
+    public void updateApprovedUser(String id_document, List<String> approvedUser) {
+        DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
+        Map<String, Object> map = new HashMap<>();
+        map.put("approved_users_list", approvedUser);
+        docRef.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                } else {
+
+                }
+            }
+        });
     }
 
 

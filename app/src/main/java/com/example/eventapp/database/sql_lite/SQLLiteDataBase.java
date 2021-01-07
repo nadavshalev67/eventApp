@@ -7,6 +7,8 @@ import com.example.eventapp.database.sql_lite.SQLiteDB;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.models.User;
 
+import java.util.List;
+
 public class SQLLiteDataBase extends SQLBase {
 
     SQLiteDB sqLiteDB;
@@ -15,6 +17,11 @@ public class SQLLiteDataBase extends SQLBase {
     public SQLLiteDataBase(Context context) {
         super(context);
         sqLiteDB = new SQLiteDB(context);
+    }
+
+    @Override
+    public void updateApprovedUser(String id_document, List<String> approvedUser) {
+
     }
 
     @Override
