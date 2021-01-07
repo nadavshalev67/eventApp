@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        String email = emailEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         switch (view.getId()) {
             case R.id.sign_in_btn: {

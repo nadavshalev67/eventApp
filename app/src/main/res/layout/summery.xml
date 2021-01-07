@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/d_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/eventbeck"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/summry_head"
-        android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="Summery"
-        android:textColor="#E30505"
-        android:textSize="56sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/summry_head"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="86dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Summery"-->
+<!--        android:textColor="#E30505"-->
+<!--        android:textSize="56sp" />-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -271,16 +270,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/esey_textviewt"
+                android:id="@+id/easy_textviewt"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:gravity="center"
-                android:text="Esey"
+                android:text="Easy"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/esey_edittext"
+                android:id="@+id/easy_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"

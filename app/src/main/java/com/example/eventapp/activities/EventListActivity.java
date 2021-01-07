@@ -85,11 +85,13 @@ public class EventListActivity extends AppCompatActivity implements SQLBase.SqlL
                 Intent intent2 = new Intent(this, AddEditEventActivity.class);
                 startActivity(intent2);
                 return true;
-            case R.id.summary: {
+            case R.id.summary:
+                Intent intent1 = new Intent(this,Summary.class);
+                startActivity(intent1);
 
                 return true;
 
-            }
+
         }
         return false;
     }
