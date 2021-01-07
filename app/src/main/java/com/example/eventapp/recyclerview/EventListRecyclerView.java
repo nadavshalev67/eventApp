@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventapp.R;
+import com.example.eventapp.activities.AddCommentActivity;
 import com.example.eventapp.activities.AddEditEventActivity;
 import com.example.eventapp.database.SQLHolder;
 import com.example.eventapp.models.Event;
@@ -53,7 +55,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
         holder.mRejectedCounter.setText(String.valueOf(event.rejected_users_list.size()));
         Picasso.get().load(event.url_of_pitcure).into(holder.mImageView);
         if (event.user_id.equals(Utilities.getUUID())) {
-            disableViews(holder.mButtonApprove, holder.mButtonDisapproved);
+            disableViews(holder.mButtonApprove, holder.mButtonDisapproved, holder.mAddCommentButton);
             holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -74,6 +76,15 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             });
         } else {
             hideViews(holder.mDeleteButton, holder.mEditButton);
+            holder.mAddCommentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mActivity, AddCommentActivity.class);
+                    String eventId = mData.get(position).id_document;
+                    intent.putExtra("eventId", eventId);
+                    mActivity.startActivity(intent);
+                }
+            });
             if (isUserAlreadyResponed(event, Utilities.getUUID())) {
                 disableViews(holder.mButtonApprove, holder.mButtonDisapproved);
             } else {
@@ -93,12 +104,6 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
                         disableViews(holder.mButtonApprove, holder.mButtonDisapproved);
                         event.approved_users_list.add(Utilities.getUUID());
                         SQLHolder.getInstance().updateApprovedUser(event, Utilities.getUUID());
-//                        SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 3);
-//                        if (event.approved_users_list.size() == 5) {
-//                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 10);
-//                        } else if (event.approved_users_list.size() > 5) {
-//                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 2);
-//                        }
                         notifyDataSetChanged();
                     }
                 });
@@ -124,6 +129,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
         ImageView mButtonApprove;
         ImageView mEditButton;
         ImageView mDeleteButton;
+        ImageButton mAddCommentButton;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -137,8 +143,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             mAdress = itemView.findViewById(R.id.eventAddressFill);
             mApprovedCounter = itemView.findViewById(R.id.approve_count_user);
             mRejectedCounter = itemView.findViewById(R.id.disaprove_count);
-
-
+            mAddCommentButton = itemView.findViewById(R.id.bth_addCommrnt);
         }
     }
 

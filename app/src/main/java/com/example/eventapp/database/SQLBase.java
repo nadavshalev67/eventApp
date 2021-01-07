@@ -3,6 +3,7 @@ package com.example.eventapp.database;
 import android.content.Context;
 
 import com.example.eventapp.database.firestore.FireStoreSql;
+import com.example.eventapp.models.Comment;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.models.User;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 public abstract class SQLBase {
     protected String EVENT_TABLE_NAME = "event";
+    protected String COMMENT_TABLE_NAME = "Comment";
     protected String USER_TABLE_NAME = "Users";
 
     public abstract void updateApprovedUser(Event enent, String uuidOfUserApproved);
@@ -23,6 +25,9 @@ public abstract class SQLBase {
     public abstract void removeEvent(String id_document);
 
     public abstract void updateEvent(String id_document, Event event, FireStoreSql.SqlListener listener);
+
+    public abstract void insertComment(Comment comment, FireStoreSql.SqlListener sqlListener);
+
 
 
     public interface SqlListener {

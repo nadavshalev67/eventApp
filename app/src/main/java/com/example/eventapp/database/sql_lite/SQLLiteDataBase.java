@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.eventapp.database.SQLBase;
 import com.example.eventapp.database.sql_lite.SQLiteDB;
+import com.example.eventapp.models.Comment;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.models.User;
 
@@ -43,6 +44,11 @@ public class SQLLiteDataBase extends SQLBase {
 
     @Override
     public void updateEvent(String id_document, Event event, SqlListener listener) {
+
+    }
+
+    @Override
+    public void insertComment(Comment comment, SqlListener sqlListener) {
 
     }
 

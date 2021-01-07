@@ -14,8 +14,6 @@ import com.example.eventapp.models.Event;
 import java.util.List;
 
 public class Summary extends Activity implements SQLBase.SqlListenerEvents {
-
-
     EditText mMyEvents, mApproved, mRejected,
             mProfitFromEvent, mProfitFromApperoved,
             mMaxEvent, mUser, mMaxTotalT,

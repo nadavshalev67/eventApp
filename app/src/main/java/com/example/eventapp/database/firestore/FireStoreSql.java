@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.example.eventapp.database.SQLBase;
+import com.example.eventapp.models.Comment;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.models.User;
 import com.example.eventapp.utitlities.Utilities;
@@ -136,6 +137,19 @@ public class FireStoreSql extends SQLBase {
             public void onSuccess(Void aVoid) {
                 if (listener != null) {
                     listener.onCompleteListener();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void insertComment(Comment comment, FireStoreSql.SqlListener sqlListener) {
+        DocumentReference docRef = mDB.collection(COMMENT_TABLE_NAME).document();
+        docRef.set(comment.genereateHashMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                if (sqlListener != null) {
+                    sqlListener.onCompleteListener();
                 }
             }
         });
