@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="177dp"
@@ -26,9 +26,9 @@
 
         <LinearLayout
             android:layout_width="218dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="@drawable/listbeack"
+            android:background="#ECECEC"
             android:orientation="vertical">
 
             <TextView
@@ -52,15 +52,21 @@
             <TextView
                 android:id="@+id/eventDesc"
                 android:layout_width="match_parent"
-                android:layout_height="62dp"
+                android:layout_height="42dp"
                 android:paddingLeft="5dp"
                 android:text="Description"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
-            <Space
+
+            <TextView
+                android:id="@+id/descriptionFill"
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="42dp"
+                android:paddingLeft="5dp">
+
+            </TextView>
+
 
             <TextView
                 android:id="@+id/eventAddress"
@@ -71,53 +77,40 @@
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
-            <Space
+            <TextView
+                android:id="@+id/eventAddressFill"
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="42dp"
+                android:paddingLeft="5dp">
 
-            <Spinner
-                android:id="@+id/lavalOfdanger"
-                android:layout_width="match_parent"
-                android:layout_height="38dp" />
+            </TextView>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="12dp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/bth_allComment"
-                    android:layout_width="54dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/comment" />
 
                 <ImageButton
                     android:id="@+id/bth_addCommrnt"
-                    android:layout_width="54dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/addcomment" />
 
-                <ImageButton
-                    android:id="@+id/bth_coin"
-                    android:layout_width="51dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/coin" />
 
-                <EditText
-                    android:id="@+id/coin_count"
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
             </LinearLayout>
 
         </LinearLayout>
@@ -153,6 +146,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="-51dp"
                 android:ems="10"
+                android:enabled="false"
                 android:gravity="center"
                 android:textColor="#000000" />
 
@@ -165,6 +159,7 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginBottom="-51dp"
                 android:ems="10"
+                android:enabled="false"
                 android:gravity="center"
                 android:inputType="textPersonName"
                 android:textColor="#000000"

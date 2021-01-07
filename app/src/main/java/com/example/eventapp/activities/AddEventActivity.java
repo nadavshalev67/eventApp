@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +26,14 @@ import com.example.eventapp.database.firestore.FireStoreSql;
 import com.example.eventapp.database.SQLHolder;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.utitlities.Utilities;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class AddEventActivity extends Activity implements View.OnClickListener, FireStoreSql.SqlListener {
@@ -32,6 +41,7 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
     private EditText mEventName, mEventDesc, mEventAddress;
     private Spinner mLevelOfRiskSpinnner;
     private Button mAddBtn;
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private boolean mIsImageSeted = false;
 
     private static final int CAMERA_REQUEST = 1888;
@@ -131,9 +141,48 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
                     return;
                 }
 
-                Bitmap bm = ((BitmapDrawable) mImageDescription.getDrawable()).getBitmap();
-                Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, Utilities.convertBitMapToString(bm), Utilities.getUUID());
-                SQLHolder.getInstance().insertEvent(event, this);
+                //Upload Image
+                mImageDescription.setDrawingCacheEnabled(true);
+                mImageDescription.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) mImageDescription.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+                StorageReference mountainImagesRef = mStorageRef.child(String.valueOf(mImageDescription.hashCode()));
+                UploadTask uploadTask = mountainImagesRef.putBytes(data);
+
+
+
+
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        if (taskSnapshot.getMetadata() != null) {
+                            if (taskSnapshot.getMetadata().getReference() != null) {
+                                Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String imageUrl = uri.toString();
+                                        Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, imageUrl, Utilities.getUUID());
+                                        SQLHolder.getInstance().insertEvent(event, AddEventActivity.this);
+                                    }
+                                });
+                            }
+                        }
+
+
+
+                    }
+                });
+
+
+
                 break;
             }
             case R.id.AddPicBtn: {

@@ -15,19 +15,12 @@ public class Utilities {
         return mAppContext;
     }
 
-    public static void  setAppContext(Context context) {
+    public static void setAppContext(Context context) {
         mAppContext = context;
     }
 
     public static String getUUID() {
         return FirebaseAuth.getInstance().getUid();
-    }
-
-    public static String convertBitMapToString(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
 

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.eventapp.database.SQLBase;
 import com.example.eventapp.models.Event;
+import com.example.eventapp.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FireStoreSql extends SQLBase {
@@ -68,5 +70,9 @@ public class FireStoreSql extends SQLBase {
         });
     }
 
-
+    @Override
+    public void createUser(User user) {
+        DocumentReference docRef = mDB.collection(USER_TABLE_NAME).document(user.uuid);
+        docRef.set(user.genereateHashMap());
+    }
 }

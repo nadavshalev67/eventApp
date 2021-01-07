@@ -4,11 +4,13 @@ import android.content.Context;
 
 import com.example.eventapp.database.firestore.FireStoreSql;
 import com.example.eventapp.models.Event;
+import com.example.eventapp.models.User;
 
 import java.util.List;
 
 public abstract class SQLBase {
     protected String EVENT_TABLE_NAME = "event";
+    protected String USER_TABLE_NAME = "Users";
 
     public interface SqlListener {
         void onCompleteListener();
@@ -25,6 +27,8 @@ public abstract class SQLBase {
     public abstract void insertEvent(Event event, FireStoreSql.SqlListener sqlListener);
 
     public abstract void getAllEvents(SqlListenerEvents sqlListenerEvents);
+
+    public abstract void createUser(User user);
 
     public SQLBase(Context context) {
         this.mContext = context;

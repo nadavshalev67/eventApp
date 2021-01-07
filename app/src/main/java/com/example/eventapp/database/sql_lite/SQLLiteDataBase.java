@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.eventapp.database.SQLBase;
 import com.example.eventapp.database.sql_lite.SQLiteDB;
 import com.example.eventapp.models.Event;
+import com.example.eventapp.models.User;
 
 public class SQLLiteDataBase extends SQLBase {
 
@@ -23,6 +24,11 @@ public class SQLLiteDataBase extends SQLBase {
 
     @Override
     public void getAllEvents(SqlListenerEvents sqlListenerEvents) {
+
+    }
+
+    @Override
+    public void createUser(User user) {
 
     }
 }

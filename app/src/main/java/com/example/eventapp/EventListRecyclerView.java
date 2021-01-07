@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventapp.models.Event;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,6 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
     // data is passed into the constructor
     public EventListRecyclerView(Context context) {
         this.mInflater = LayoutInflater.from(context);
-
     }
 
     // inflates the row layout from xml when needed
@@ -36,6 +38,11 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
     public void onBindViewHolder(ViewHolder holder, int position) {
         Event event = mData.get(position);
         holder.mEventName.setText(event.event_name);
+        holder.mDescription.setText(event.event_description);
+        holder.mAdress.setText(event.event_adress);
+        holder.mApprovedCounter.setText(String.valueOf(event.approved_users_list.size()));
+        holder.mRejectedCounter.setText(String.valueOf(event.rejected_users_list.size()));
+        Picasso.get().load(event.url_of_pitcure).into(holder.mImageView);
     }
 
     // total number of rows
@@ -46,10 +53,21 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mEventName;
+        TextView mDescription;
+        TextView mAdress;
+        EditText mApprovedCounter;
+        EditText mRejectedCounter;
+        ImageView mImageView;
 
         ViewHolder(View itemView) {
             super(itemView);
+            mImageView = itemView.findViewById(R.id.eventPic);
             mEventName = itemView.findViewById(R.id.eventNameFill);
+            mDescription = itemView.findViewById(R.id.descriptionFill);
+            mAdress = itemView.findViewById(R.id.eventAddressFill);
+            mApprovedCounter = itemView.findViewById(R.id.approve_count_user);
+            mRejectedCounter = itemView.findViewById(R.id.disaprove_count);
+
         }
     }
 
