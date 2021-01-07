@@ -31,11 +31,11 @@ public class Summary extends Activity implements SQLBase.SqlListenerEvents {
 
     }
 
-    public void init(){
+    public void init() {
         mMyEvents = findViewById(R.id.myevent_edittext);
         mApproved = findViewById(R.id.approve_count_user);
         mRejected = findViewById(R.id.rejected_edittext);
-        mProfitFromEvent= findViewById(R.id.TotalProfit_edittext);
+        mProfitFromEvent = findViewById(R.id.TotalProfit_edittext);
         mProfitFromApperoved = findViewById(R.id.TotalApproved_edittext);
         mMaxEvent = findViewById(R.id.eventNum_edittext);
         mUser = findViewById(R.id.summery_emailedittext);
@@ -49,30 +49,24 @@ public class Summary extends Activity implements SQLBase.SqlListenerEvents {
     }
 
 
-
-
     @Override
     public void onGetAllEvents(List<Event> events) {
         int easy = 0;
-        int medium = 0 ;
-        int hard = 0 ;
-        for (Event event : events){
-            if(event.level_of_risk.equals("easy")){
+        int medium = 0;
+        int hard = 0;
+        for (Event event : events) {
+            if (event.level_of_risk.equals("easy")) {
                 easy++;
-            }if(event.level_of_risk.equals("medium")){
+            }
+            if (event.level_of_risk.equals("medium")) {
                 medium++;
-            }if(event.level_of_risk.equals("hard")){
+            }
+            if (event.level_of_risk.equals("hard")) {
                 hard++;
             }
-
-        mLevelE.setText(String.valueOf(easy));
-        mLevelM.setText(String.valueOf(medium));
-        mLevelH.setText(String.valueOf(hard));
-
-
-
-
-
+            mLevelE.setText(String.valueOf(easy));
+            mLevelM.setText(String.valueOf(medium));
+            mLevelH.setText(String.valueOf(hard));
         }
 
     }
