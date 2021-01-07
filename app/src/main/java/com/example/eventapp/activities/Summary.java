@@ -27,8 +27,6 @@ public class Summary extends Activity implements SQLBase.SqlListenerEvents {
         setContentView(R.layout.summery);
         init();
         SQLHolder.getInstance().getAllEvents(this);
-
-
     }
 
     public void init() {
@@ -44,8 +42,6 @@ public class Summary extends Activity implements SQLBase.SqlListenerEvents {
         mLevelE = findViewById(R.id.easy_edittext);
         mLevelM = findViewById(R.id.medium_edittext);
         mLevelH = findViewById(R.id.editTextTextPersonName12);
-
-
     }
 
 
