@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventapp.R;
-import com.example.eventapp.activities.AddEventActivity;
+import com.example.eventapp.activities.AddEditEventActivity;
 import com.example.eventapp.database.SQLHolder;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.utitlities.Utilities;
@@ -65,7 +65,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             holder.mEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mActivity, AddEventActivity.class);
+                    Intent intent = new Intent(mActivity, AddEditEventActivity.class);
                     Gson gson = new Gson();
                     String eventJson = gson.toJson(event);
                     intent.putExtra("eventJson", eventJson);

@@ -38,7 +38,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 
 
-public class AddEventActivity extends Activity implements View.OnClickListener, FireStoreSql.SqlListener {
+public class AddEditEventActivity extends Activity implements View.OnClickListener, FireStoreSql.SqlListener {
     private ImageView mAddPicBtn, mImageDescription;
     private EditText mEventName, mEventDesc, mEventAddress;
     private Spinner mLevelOfRiskSpinnner;
@@ -132,26 +132,26 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
                 String levelOfRisk = mLevelOfRiskSpinnner.getSelectedItem().toString();
 
                 if (TextUtils.isEmpty(mEventName.getText().toString())) {
-                    Toast.makeText(AddEventActivity.this, "please enter name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddEditEventActivity.this, "please enter name", Toast.LENGTH_LONG).show();
                     return;
                 }
                 eventName = mEventName.getText().toString();
 
                 if (TextUtils.isEmpty(mEventDesc.getText().toString())) {
-                    Toast.makeText(AddEventActivity.this, "please enter description", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddEditEventActivity.this, "please enter description", Toast.LENGTH_LONG).show();
                     return;
                 }
                 eventDescription = mEventDesc.getText().toString();
 
                 if (TextUtils.isEmpty(mEventAddress.getText().toString())) {
-                    Toast.makeText(AddEventActivity.this, "please enter email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddEditEventActivity.this, "please enter email", Toast.LENGTH_LONG).show();
                     return;
                 }
                 eventAdress = mEventAddress.getText().toString();
 
 
                 if (!mIsImageSeted) {
-                    Toast.makeText(AddEventActivity.this, "please take a photo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddEditEventActivity.this, "please take a photo", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -180,9 +180,9 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
                                     public void onSuccess(Uri uri) {
                                         Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, uri.toString(), Utilities.getUUID());
                                         if (editEvent == null) {
-                                            SQLHolder.getInstance().insertEvent(event, AddEventActivity.this);
+                                            SQLHolder.getInstance().insertEvent(event, AddEditEventActivity.this);
                                         } else {
-                                            SQLHolder.getInstance().updateEvent(editEvent.id_document, event,AddEventActivity.this);
+                                            SQLHolder.getInstance().updateEvent(editEvent.id_document, event, AddEditEventActivity.this);
                                         }
 
                                     }
@@ -221,13 +221,13 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
 
     @Override
     public void onCompleteListener() {
-        Toast.makeText(AddEventActivity.this, "Event added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddEditEventActivity.this, "Event added", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @Override
     public void onFailedListener(Exception e) {
-        Toast.makeText(AddEventActivity.this, "Failed to upload event", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddEditEventActivity.this, "Failed to upload event", Toast.LENGTH_SHORT).show();
     }
 }
 
