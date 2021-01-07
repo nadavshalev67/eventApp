@@ -112,7 +112,7 @@ public class FireStoreSql extends SQLBase {
     @Override
     public void updateEvent(String id_document, Event event, FireStoreSql.SqlListener listener) {
         DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
-        docRef.update(event.genereateHashMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+        docRef.update(event.genereateUpadteHashMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 if (listener != null) {
