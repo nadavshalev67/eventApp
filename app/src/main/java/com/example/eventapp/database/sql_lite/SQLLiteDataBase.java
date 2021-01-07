@@ -26,6 +26,11 @@ public class SQLLiteDataBase extends SQLBase {
     }
 
     @Override
+    public void getAllUsers(SqlListenerUsers listener) {
+
+    }
+
+    @Override
     public void updateRejectedUser(String id_document, List<String> rejectedUser) {
 
     }
