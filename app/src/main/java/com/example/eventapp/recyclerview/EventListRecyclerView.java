@@ -92,13 +92,13 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
                     public void onClick(View view) {
                         disableViews(holder.mButtonApprove, holder.mButtonDisapproved);
                         event.approved_users_list.add(Utilities.getUUID());
-                        SQLHolder.getInstance().updateApprovedUser(event.id_document, event.approved_users_list);
-                        SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 3);
-                        if (event.approved_users_list.size() == 5) {
-                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 10);
-                        } else if (event.approved_users_list.size() > 5) {
-                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 2);
-                        }
+                        SQLHolder.getInstance().updateApprovedUser(event, Utilities.getUUID());
+//                        SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 3);
+//                        if (event.approved_users_list.size() == 5) {
+//                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 10);
+//                        } else if (event.approved_users_list.size() > 5) {
+//                            SQLHolder.getInstance().updateCurrencyForUser(Utilities.getUUID(), 2);
+//                        }
                         notifyDataSetChanged();
                     }
                 });

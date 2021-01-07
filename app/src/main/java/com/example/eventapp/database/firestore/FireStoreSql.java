@@ -35,11 +35,50 @@ public class FireStoreSql extends SQLBase {
 
 
     @Override
-    public void updateApprovedUser(String id_document, List<String> approvedUser) {
-        DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
+    public void updateApprovedUser(Event event, String uuidOfUserApproved) {
+        DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(event.id_document);
         Map<String, Object> map = new HashMap<>();
-        map.put("approved_users_list", approvedUser);
-        docRef.update(map);
+        map.put("approved_users_list", event.approved_users_list);
+        docRef.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDB.collection(USER_TABLE_NAME).document(event.user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        int currencyToAddToCreatedUser = 0;
+                        if (event.approved_users_list.size() == 5) {
+                            currencyToAddToCreatedUser = 10;
+                        } else if (event.approved_users_list.size() > 5) {
+                            currencyToAddToCreatedUser = 2;
+                        }
+                        String currentCurrency = (String) task.getResult().get("coins_aprroved_by_other_users_to_my_events");
+                        int result = Integer.parseInt(currentCurrency) + currencyToAddToCreatedUser;
+                        HashMap<String, Object> objectHashMap = new HashMap<>();
+                        objectHashMap.put("coins_aprroved_by_other_users_to_my_events", result);
+                        mDB.collection(USER_TABLE_NAME).document(event.user_id).update(objectHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                mDB.collection(USER_TABLE_NAME).document(uuidOfUserApproved).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        String conis_approved_to_other = (String) task.getResult().get("conis_from_my_approve_to_other_user");
+                                        String amount_approved_by_me = (String) task.getResult().get("amount_approved_by_me");
+                                        int result_conis_approved_to_other = Integer.parseInt(conis_approved_to_other) + 3;
+                                        int result_amount_approved_by_me = Integer.parseInt(amount_approved_by_me) + 1;
+                                        HashMap<String, Object> objectHashMap = new HashMap<>();
+                                        objectHashMap.put("conis_from_my_approve_to_other_user", result_conis_approved_to_other);
+                                        objectHashMap.put("amount_approved_by_me", result_amount_approved_by_me);
+                                        mDB.collection(USER_TABLE_NAME).document(uuidOfUserApproved).update(objectHashMap);
+                                    }
+                                });
+
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -47,19 +86,20 @@ public class FireStoreSql extends SQLBase {
         DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
         Map<String, Object> map = new HashMap<>();
         map.put("rejected_users_list", rejectedUser);
-        docRef.update(map);
-    }
-
-    @Override
-    public void updateCurrencyForUser(String uuid, int i) {
-        mDB.collection(USER_TABLE_NAME).document(Utilities.getUUID()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                String currentCurrency = (String) task.getResult().get("coins_amount");
-                int result = Integer.parseInt(currentCurrency) + i;
-                HashMap<String, Object> objectHashMap = new HashMap<>();
-                objectHashMap.put("coins_amount", result);
-                mDB.collection(USER_TABLE_NAME).document(Utilities.getUUID()).update(objectHashMap);
+            public void onSuccess(Void aVoid) {
+                final String uuid = Utilities.getUUID();
+                mDB.collection(USER_TABLE_NAME).document(uuid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String currentCurrency = (String) task.getResult().get("amount_rejected_by_me");
+                        int result = Integer.parseInt(currentCurrency) + 1;
+                        HashMap<String, Object> objectHashMap = new HashMap<>();
+                        objectHashMap.put("amount_rejected_by_me", result);
+                        mDB.collection(USER_TABLE_NAME).document(uuid).update(objectHashMap);
+                    }
+                });
             }
         });
     }
@@ -82,14 +122,23 @@ public class FireStoreSql extends SQLBase {
         });
     }
 
-
     @Override
-    public void insertEvent(Event event, SqlListener sqlListener) {
+    public void insertEvent(String userCreated, Event event, SqlListener sqlListener) {
         DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document();
         docRef.set(event.genereateHashMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 if (sqlListener != null) {
+                    mDB.collection(USER_TABLE_NAME).document(userCreated).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            String currentCurrency = (String) task.getResult().get("amout_of_my_events");
+                            int result = Integer.parseInt(currentCurrency) + 1;
+                            HashMap<String, Object> objectHashMap = new HashMap<>();
+                            objectHashMap.put("amout_of_my_events", result);
+                            mDB.collection(USER_TABLE_NAME).document(userCreated).update(objectHashMap);
+                        }
+                    });
                     sqlListener.onCompleteListener();
                 }
             }

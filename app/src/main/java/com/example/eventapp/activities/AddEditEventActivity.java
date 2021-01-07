@@ -29,6 +29,7 @@ import com.example.eventapp.utitlities.Utilities;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,6 +37,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.util.UUID;
 
 
 public class AddEditEventActivity extends Activity implements View.OnClickListener, FireStoreSql.SqlListener {
@@ -58,7 +60,7 @@ public class AddEditEventActivity extends Activity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_a_event);
+        setContentView(R.layout.add_edit_event_activity);
         Gson gson = new Gson();
         editEvent = gson.fromJson(getIntent().getStringExtra("eventJson"), Event.class);
         initViews();
@@ -180,7 +182,7 @@ public class AddEditEventActivity extends Activity implements View.OnClickListen
                                     public void onSuccess(Uri uri) {
                                         Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, uri.toString(), Utilities.getUUID());
                                         if (editEvent == null) {
-                                            SQLHolder.getInstance().insertEvent(event, AddEditEventActivity.this);
+                                            SQLHolder.getInstance().insertEvent(Utilities.getUUID(), event, AddEditEventActivity.this);
                                         } else {
                                             SQLHolder.getInstance().updateEvent(editEvent.id_document, event, AddEditEventActivity.this);
                                         }

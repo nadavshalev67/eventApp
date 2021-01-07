@@ -12,11 +12,11 @@ public abstract class SQLBase {
     protected String EVENT_TABLE_NAME = "event";
     protected String USER_TABLE_NAME = "Users";
 
-    public abstract void updateApprovedUser(String id_document, List<String> approvedUser);
+    public abstract void updateApprovedUser(Event enent, String uuidOfUserApproved);
 
     public abstract void updateRejectedUser(String id_document, List<String> rejectedUser);
 
-    public abstract void updateCurrencyForUser(String uuid, int i);
+    //public abstract void updateCurrencyForUser(String uuid, int i);
 
     public abstract void removeEvent(String id_document);
 
@@ -35,7 +35,7 @@ public abstract class SQLBase {
 
     protected Context mContext;
 
-    public abstract void insertEvent(Event event, FireStoreSql.SqlListener sqlListener);
+    public abstract void insertEvent(String createdBy, Event event, FireStoreSql.SqlListener sqlListener);
 
     public abstract void getAllEvents(SqlListenerEvents sqlListenerEvents);
 
