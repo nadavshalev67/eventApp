@@ -29,6 +29,7 @@ public class User {
         values.put("amount_approved_by_me", "0");
         values.put("amount_rejected_by_me", "0");
         values.put("conis_from_my_approve_to_other_user", "0");
+        values.put("email", this.email);
         return values;
     }
 }
