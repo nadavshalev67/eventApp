@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
+
 public class Summary extends Activity implements SQLBase.SqlListenerEvents , SQLBase.SqlListenerUsers {
 
 
