@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eventapp.R;
+import com.example.eventapp.database.SQLHolder;
+import com.example.eventapp.models.User;
 import com.example.eventapp.utitlities.Utilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -107,7 +109,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
+
                                         FirebaseUser user = mAuth.getCurrentUser();
+                                        User user1 = new User("0", user.getUid());
+                                        SQLHolder.getInstance().createUser(user1);
                                         updateUI(user);
                                     } else {
                                         // If sign in fails, display a message to the user.

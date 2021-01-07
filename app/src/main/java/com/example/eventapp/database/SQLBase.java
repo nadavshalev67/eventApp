@@ -16,6 +16,12 @@ public abstract class SQLBase {
 
     public abstract void updateRejectedUser(String id_document, List<String> rejectedUser);
 
+    public abstract void updateCurrencyForUser(String uuid, int i);
+
+    public abstract void removeEvent(String id_document);
+
+    public abstract void updateEvent(String id_document, Event event, FireStoreSql.SqlListener listener);
+
 
     public interface SqlListener {
         void onCompleteListener();

@@ -30,6 +30,22 @@ public class SQLLiteDataBase extends SQLBase {
     }
 
     @Override
+    public void updateCurrencyForUser(String uuid, int i) {
+
+    }
+
+    @Override
+    public void removeEvent(String id_document) {
+
+    }
+
+    @Override
+    public void updateEvent(String id_document, Event event, SqlListener listener) {
+
+    }
+
+
+    @Override
     public void insertEvent(Event event, SqlListener sqlListener) {
 
     }

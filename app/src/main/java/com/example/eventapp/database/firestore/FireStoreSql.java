@@ -1,17 +1,20 @@
 package com.example.eventapp.database.firestore;
 
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
 import com.example.eventapp.database.SQLBase;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.models.User;
+import com.example.eventapp.utitlities.Utilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,16 +39,7 @@ public class FireStoreSql extends SQLBase {
         DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
         Map<String, Object> map = new HashMap<>();
         map.put("approved_users_list", approvedUser);
-        docRef.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-
-                } else {
-
-                }
-            }
-        });
+        docRef.update(map);
     }
 
     @Override
@@ -53,18 +47,39 @@ public class FireStoreSql extends SQLBase {
         DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
         Map<String, Object> map = new HashMap<>();
         map.put("rejected_users_list", rejectedUser);
-        docRef.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+        docRef.update(map);
+    }
+
+    @Override
+    public void updateCurrencyForUser(String uuid, int i) {
+        mDB.collection(USER_TABLE_NAME).document(Utilities.getUUID()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String currentCurrency = (String) task.getResult().get("coins_amount");
+                int result = Integer.parseInt(currentCurrency) + i;
+                HashMap<String, Object> objectHashMap = new HashMap<>();
+                objectHashMap.put("coins_amount", result);
+                mDB.collection(USER_TABLE_NAME).document(Utilities.getUUID()).update(objectHashMap);
+            }
+        });
+    }
 
-                } else {
+    @Override
+    public void removeEvent(String id_document) {
+        mDB.collection(EVENT_TABLE_NAME).document(id_document).delete();
+    }
 
+    @Override
+    public void updateEvent(String id_document, Event event, FireStoreSql.SqlListener listener) {
+        DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
+        docRef.update(event.genereateHashMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                if (listener != null) {
+                    listener.onCompleteListener();
                 }
             }
         });
-
-
     }
 
 
@@ -111,6 +126,15 @@ public class FireStoreSql extends SQLBase {
     @Override
     public void createUser(User user) {
         DocumentReference docRef = mDB.collection(USER_TABLE_NAME).document(user.uuid);
-        docRef.set(user.genereateHashMap());
+        docRef.set(user.genereateHashMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                } else {
+
+                }
+            }
+        });
     }
 }

@@ -117,7 +117,7 @@
 
         <RelativeLayout
             android:layout_width="176dp"
-            android:layout_height="123dp"
+            android:layout_height="90dp"
             android:layout_marginTop="174dp"
             android:background="@drawable/listbeack">
 
@@ -164,7 +164,33 @@
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textSize="18sp" />
+
+
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="179dp"
+            android:layout_height="58dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/listbeack">
+
+            <ImageButton
+                android:id="@+id/bth_edit"
+                android:layout_width="74dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/edit" />
+
+            <ImageButton
+                android:id="@+id/bth_delete"
+                android:layout_width="66dp"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@id/bth_edit"
+                android:layout_marginLeft="84dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/deletebutton" />
+        </RelativeLayout>
+
 
     </androidx.cardview.widget.CardView>
 

@@ -4,6 +4,7 @@ package com.example.eventapp.models;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Event {
+public class Event implements Serializable {
 
     public String event_adress;
     public List<String> approved_users_list = new ArrayList<>();
@@ -67,6 +68,16 @@ public class Event {
         valuesMap.put("url_of_pitcure", url_of_pitcure);
         valuesMap.put("rejected_users_list", rejected_users_list);
         valuesMap.put("user_id", user_id);
+        return valuesMap;
+    }
+
+
+    public Map<String, Object> genereateUpadteHashMap() {
+        Map<String, Object> valuesMap = new HashMap<>();
+        valuesMap.put("event_adress", event_adress);
+        valuesMap.put("event_description", event_description);
+        valuesMap.put("event_name", event_name);
+        valuesMap.put("url_of_pitcure", url_of_pitcure);
         return valuesMap;
     }
 }

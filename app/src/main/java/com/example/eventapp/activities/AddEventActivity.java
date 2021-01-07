@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
@@ -44,6 +46,8 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private boolean mIsImageSeted = false;
 
+
+    private Event editEvent;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final String[] ARRAY_SPINNER = new String[]{
@@ -55,6 +59,8 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_a_event);
+        Gson gson = new Gson();
+        editEvent = gson.fromJson(getIntent().getStringExtra("eventJson"), Event.class);
         initViews();
 
     }
@@ -68,6 +74,14 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
         mAddPicBtn = findViewById(R.id.AddPicBtn);
         initSpinnner();
         setOnCLickLisenterToMultipleViews(mAddPicBtn, mAddBtn);
+        if (editEvent != null) {
+            mEventName.setText(editEvent.event_name);
+            mEventDesc.setText(editEvent.event_description);
+            mEventAddress.setText(editEvent.event_adress);
+            mIsImageSeted = true;
+            Picasso.get().load(editEvent.url_of_pitcure).into(mImageDescription);
+            mAddBtn.setText("Edit");
+        }
     }
 
     private void setOnCLickLisenterToMultipleViews(View... views) {
@@ -164,19 +178,21 @@ public class AddEventActivity extends Activity implements View.OnClickListener, 
                                 result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        String imageUrl = uri.toString();
-                                        Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, imageUrl, Utilities.getUUID());
-                                        SQLHolder.getInstance().insertEvent(event, AddEventActivity.this);
+                                        Event event = new Event(eventAdress, eventDescription, eventName, levelOfRisk, uri.toString(), Utilities.getUUID());
+                                        if (editEvent == null) {
+                                            SQLHolder.getInstance().insertEvent(event, AddEventActivity.this);
+                                        } else {
+                                            SQLHolder.getInstance().updateEvent(editEvent.id_document, event,AddEventActivity.this);
+                                        }
+
                                     }
                                 });
                             }
                         }
 
 
-
                     }
                 });
-
 
 
                 break;

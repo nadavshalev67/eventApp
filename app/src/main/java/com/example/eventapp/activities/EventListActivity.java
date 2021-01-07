@@ -34,10 +34,17 @@ public class EventListActivity extends AppCompatActivity implements SQLBase.SqlL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         fetchEventList();
     }
 
     private void fetchEventList() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
         SQLHolder.getInstance().getAllEvents(this);
     }
 
@@ -45,7 +52,7 @@ public class EventListActivity extends AppCompatActivity implements SQLBase.SqlL
         mProgressBar = findViewById(R.id.progress_bar);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new EventListRecyclerView(this);
+        mAdapter = new EventListRecyclerView(this, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
