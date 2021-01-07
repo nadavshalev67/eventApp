@@ -48,6 +48,25 @@ public class FireStoreSql extends SQLBase {
         });
     }
 
+    @Override
+    public void updateRejectedUser(String id_document, List<String> rejectedUser) {
+        DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document(id_document);
+        Map<String, Object> map = new HashMap<>();
+        map.put("rejected_users_list", rejectedUser);
+        docRef.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+
+                } else {
+
+                }
+            }
+        });
+
+
+    }
+
 
     @Override
     public void insertEvent(Event event, SqlListener sqlListener) {

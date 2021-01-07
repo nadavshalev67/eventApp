@@ -25,6 +25,11 @@ public class SQLLiteDataBase extends SQLBase {
     }
 
     @Override
+    public void updateRejectedUser(String id_document, List<String> rejectedUser) {
+
+    }
+
+    @Override
     public void insertEvent(Event event, SqlListener sqlListener) {
 
     }

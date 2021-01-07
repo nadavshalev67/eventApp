@@ -14,6 +14,9 @@ public abstract class SQLBase {
 
     public abstract void updateApprovedUser(String id_document, List<String> approvedUser);
 
+    public abstract void updateRejectedUser(String id_document, List<String> rejectedUser);
+
+
     public interface SqlListener {
         void onCompleteListener();
 

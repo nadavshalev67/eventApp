@@ -46,6 +46,17 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
         holder.mApprovedCounter.setText(String.valueOf(event.approved_users_list.size()));
         holder.mRejectedCounter.setText(String.valueOf(event.rejected_users_list.size()));
         Picasso.get().load(event.url_of_pitcure).into(holder.mImageView);
+        holder.mButtonDisapproved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                event.rejected_users_list.add(Utilities.getUUID());
+                SQLHolder.getInstance().updateRejectedUser(event.id_document, event.approved_users_list);
+
+
+
+
+            }
+        });
         holder.mButtonApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,18 +78,21 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
         TextView mAdress;
         EditText mApprovedCounter;
         EditText mRejectedCounter;
+        ImageView mButtonDisapproved;
         ImageView mImageView;
         ImageView mButtonApprove;
 
         ViewHolder(View itemView) {
             super(itemView);
             mButtonApprove = itemView.findViewById(R.id.bth_approve_user);
+            mButtonDisapproved = itemView.findViewById(R.id.bth_disapprove_user);
             mImageView = itemView.findViewById(R.id.eventPic);
             mEventName = itemView.findViewById(R.id.eventNameFill);
             mDescription = itemView.findViewById(R.id.descriptionFill);
             mAdress = itemView.findViewById(R.id.eventAddressFill);
             mApprovedCounter = itemView.findViewById(R.id.approve_count_user);
             mRejectedCounter = itemView.findViewById(R.id.disaprove_count);
+
 
 
         }
