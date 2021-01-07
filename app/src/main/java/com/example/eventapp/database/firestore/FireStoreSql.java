@@ -54,7 +54,7 @@ public class FireStoreSql extends SQLBase {
                         String currentCurrency = (String) task.getResult().get("coins_aprroved_by_other_users_to_my_events");
                         int result = Integer.parseInt(currentCurrency) + currencyToAddToCreatedUser;
                         HashMap<String, Object> objectHashMap = new HashMap<>();
-                        objectHashMap.put("coins_aprroved_by_other_users_to_my_events", result);
+                        objectHashMap.put("coins_aprroved_by_other_users_to_my_events", String.valueOf(result));
                         mDB.collection(USER_TABLE_NAME).document(event.user_id).update(objectHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -66,8 +66,8 @@ public class FireStoreSql extends SQLBase {
                                         int result_conis_approved_to_other = Integer.parseInt(conis_approved_to_other) + 3;
                                         int result_amount_approved_by_me = Integer.parseInt(amount_approved_by_me) + 1;
                                         HashMap<String, Object> objectHashMap = new HashMap<>();
-                                        objectHashMap.put("conis_from_my_approve_to_other_user", result_conis_approved_to_other);
-                                        objectHashMap.put("amount_approved_by_me", result_amount_approved_by_me);
+                                        objectHashMap.put("conis_from_my_approve_to_other_user", String.valueOf(result_conis_approved_to_other));
+                                        objectHashMap.put("amount_approved_by_me", String.valueOf(result_amount_approved_by_me));
                                         mDB.collection(USER_TABLE_NAME).document(uuidOfUserApproved).update(objectHashMap);
                                     }
                                 });

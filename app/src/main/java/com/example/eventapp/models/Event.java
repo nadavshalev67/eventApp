@@ -65,6 +65,7 @@ public class Event implements Serializable {
         valuesMap.put("approved_users_list", approved_users_list);
         valuesMap.put("event_description", event_description);
         valuesMap.put("event_name", event_name);
+        valuesMap.put("level_of_riske", level_of_risk);
         valuesMap.put("url_of_pitcure", url_of_pitcure);
         valuesMap.put("rejected_users_list", rejected_users_list);
         valuesMap.put("user_id", user_id);
