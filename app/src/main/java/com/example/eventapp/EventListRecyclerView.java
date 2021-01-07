@@ -49,19 +49,24 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
         holder.mButtonDisapproved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (event.rejected_users_list.contains(Utilities.getUUID()) || event.approved_users_list.contains(Utilities.getUUID())) {
+                    return;
+                }
                 event.rejected_users_list.add(Utilities.getUUID());
                 SQLHolder.getInstance().updateRejectedUser(event.id_document, event.approved_users_list);
-
-
-
+                notifyDataSetChanged();
 
             }
         });
         holder.mButtonApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (event.rejected_users_list.contains(Utilities.getUUID()) || event.approved_users_list.contains(Utilities.getUUID())) {
+                    return;
+                }
                 event.approved_users_list.add(Utilities.getUUID());
                 SQLHolder.getInstance().updateApprovedUser(event.id_document, event.approved_users_list);
+                notifyDataSetChanged();
             }
         });
     }
@@ -92,7 +97,6 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             mAdress = itemView.findViewById(R.id.eventAddressFill);
             mApprovedCounter = itemView.findViewById(R.id.approve_count_user);
             mRejectedCounter = itemView.findViewById(R.id.disaprove_count);
-
 
 
         }
