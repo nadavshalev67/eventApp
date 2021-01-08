@@ -53,6 +53,11 @@ public class SQLLiteDataBase extends SQLBase {
     }
 
     @Override
+    public void getAllCommentsOfOneEvent(String event_id, SqlListenerComments listener) {
+
+    }
+
+    @Override
     public void insertEvent(String createdBy, Event event, SqlListener sqlListener) {
 
     }

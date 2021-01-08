@@ -1,6 +1,7 @@
 package com.example.eventapp.database.firestore;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -150,6 +151,28 @@ public class FireStoreSql extends SQLBase {
             public void onSuccess(Void aVoid) {
                 if (sqlListener != null) {
                     sqlListener.onCompleteListener();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getAllCommentsOfOneEvent(String event_id, SqlListenerComments listener) {
+        mDB.collection(COMMENT_TABLE_NAME).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                List<Comment> comments = new ArrayList<>();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Comment comment = Comment.fromDocument(document);
+                        if (TextUtils.equals(event_id, comment.eventIdrelated)) {
+                            comments.add(comment);
+                        }
+                    }
+                    if (listener != null) {
+                        listener.onGetCommentsFromEvent(comments);
+                    }
+                } else {
                 }
             }
         });

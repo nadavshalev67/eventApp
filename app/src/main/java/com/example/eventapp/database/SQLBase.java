@@ -28,6 +28,7 @@ public abstract class SQLBase {
 
     public abstract void insertComment(Comment comment, FireStoreSql.SqlListener sqlListener);
 
+    public abstract void getAllCommentsOfOneEvent(String event_id, SqlListenerComments comments);
 
 
     public interface SqlListener {
@@ -42,6 +43,10 @@ public abstract class SQLBase {
 
     public interface SqlListenerUsers {
         void onGetAllUsers(List<User> users);
+    }
+
+    public interface SqlListenerComments {
+        void onGetCommentsFromEvent(List<Comment> users);
     }
 
     protected Context mContext;

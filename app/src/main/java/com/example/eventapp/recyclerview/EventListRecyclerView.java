@@ -1,7 +1,9 @@
 package com.example.eventapp.recyclerview;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,9 +64,33 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mData.remove(position);
-                    SQLHolder.getInstance().removeEvent(event.id_document);
-                    notifyDataSetChanged();
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(mActivity);
+                    builder1.setMessage("Delete event?");
+                    builder1.setCancelable(true);
+                    builder1.setPositiveButton(
+                            "Delete",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    mData.remove(position);
+                                    SQLHolder.getInstance().removeEvent(event.id_document);
+                                    notifyDataSetChanged();
+                                    Toast.makeText(mActivity, "item deleted", Toast.LENGTH_SHORT).show();
+                                    dialog.cancel();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+
                 }
             });
 
