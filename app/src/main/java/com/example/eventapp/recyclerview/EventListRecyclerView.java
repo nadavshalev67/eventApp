@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventapp.R;
 import com.example.eventapp.activities.AddCommentActivity;
 import com.example.eventapp.activities.AddEditEventActivity;
+import com.example.eventapp.activities.AllCommentActivity;
 import com.example.eventapp.database.SQLHolder;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.utitlities.Utilities;
@@ -64,6 +66,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
                     notifyDataSetChanged();
                 }
             });
+
             holder.mEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -76,6 +79,14 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             });
         } else {
             hideViews(holder.mDeleteButton, holder.mEditButton);
+            holder.mButtonAllComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mActivity, AllCommentActivity.class);
+                    mActivity.startActivity(intent);
+
+                }
+            });
             holder.mAddCommentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,6 +96,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
                     mActivity.startActivity(intent);
                 }
             });
+
             if (isUserAlreadyResponed(event, Utilities.getUUID())) {
                 disableViews(holder.mButtonApprove, holder.mButtonDisapproved);
             } else {
@@ -130,6 +142,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
         ImageView mEditButton;
         ImageView mDeleteButton;
         ImageButton mAddCommentButton;
+        ImageButton mButtonAllComment;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -144,6 +157,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             mApprovedCounter = itemView.findViewById(R.id.approve_count_user);
             mRejectedCounter = itemView.findViewById(R.id.disaprove_count);
             mAddCommentButton = itemView.findViewById(R.id.bth_addCommrnt);
+            mButtonAllComment = itemView.findViewById(R.id.bth_allComment);
         }
     }
 
@@ -172,4 +186,7 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
             view.setVisibility(View.INVISIBLE);
         }
     }
+
+
+
 }

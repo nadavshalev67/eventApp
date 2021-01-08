@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.AllCommentActivity" />
+
         <activity android:name=".activities.EventListActivity" />
 
         <activity android:name=".activities.Summary" />
