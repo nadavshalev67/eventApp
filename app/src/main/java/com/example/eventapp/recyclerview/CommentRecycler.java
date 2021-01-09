@@ -98,7 +98,6 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
         TextView mContentComment;
         ImageView mDeleteButton;
 
-
         ViewHolder(View itemView) {
             super(itemView);
             mUserEmailComment = itemView.findViewById(R.id.userEmailComment);
@@ -107,7 +106,6 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
         }
 
     }
-
 
     public void updateCommentList(List<Comment> comments) {
         mData.clear();
