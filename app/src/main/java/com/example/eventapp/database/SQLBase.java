@@ -28,7 +28,7 @@ public abstract class SQLBase {
 
     public abstract void insertComment(Comment comment, FireStoreSql.SqlListener sqlListener);
 
-    public abstract void getAllCommentsOfOneEvent(String event_id, SqlListenerComments comments);
+    public abstract void getAllCommentsOfOneEvent(String event_id, SqlListenerComments listener);
 
 
     public interface SqlListener {

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventapp.R;
+import com.example.eventapp.database.SQLBase;
+import com.example.eventapp.database.SQLHolder;
 import com.example.eventapp.models.Comment;
 import com.example.eventapp.recyclerview.CommentRecycler;
 import com.example.eventapp.recyclerview.EventListRecyclerView;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AllCommentActivity extends Activity {
+public class AllCommentActivity extends Activity implements SQLBase.SqlListenerComments {
 
     CommentRecycler mAdapter;
     RecyclerView mRecyclerView;
@@ -32,24 +34,11 @@ public class AllCommentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comment_list);
         initViews();
-        fetchEventList();
+        Bundle bundle = getIntent().getExtras();
+        String id = bundle.getString("id");
+        SQLHolder.getInstance().getAllCommentsOfOneEvent(id,this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        fetchEventList();
-    }
-
-    private void fetchEventList() {
-        List<Comment> comments = new ArrayList<>();
-        comments.add(new Comment("hello", "2", "email@gmail.com"));
-        comments.add(new Comment("hello1", "2", "email1@gmail.com"));
-        comments.add(new Comment("hello2", "2", "email2@gmail.com"));
-        comments.add(new Comment("hello3", "2", "email3@gmail.com"));
-        comments.add(new Comment("hello4", "2", "email4@gmail.com"));
-        mAdapter.updateCommentList(comments);
-    }
 
 
     private void initViews() {
@@ -57,6 +46,13 @@ public class AllCommentActivity extends Activity {
         mAdapter = new CommentRecycler(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onGetCommentsFromEvent(List<Comment> comments) {
+        mAdapter.updateCommentList(comments);
+
+
     }
 }
 

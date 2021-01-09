@@ -110,6 +110,8 @@ public class EventListRecyclerView extends RecyclerView.Adapter<EventListRecycle
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mActivity, AllCommentActivity.class);
+                    String id = mData.get(position).id_document;
+                    intent.putExtra("id", id);
                     mActivity.startActivity(intent);
 
                 }
