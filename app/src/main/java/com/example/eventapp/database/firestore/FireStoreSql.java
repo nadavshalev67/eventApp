@@ -179,6 +179,11 @@ public class FireStoreSql extends SQLBase {
     }
 
     @Override
+    public void removeComment(String commentID) {
+        mDB.collection(COMMENT_TABLE_NAME).document(commentID).delete();
+    }
+
+    @Override
     public void insertEvent(String userCreated, Event event, SqlListener sqlListener) {
         DocumentReference docRef = mDB.collection(EVENT_TABLE_NAME).document();
         docRef.set(event.genereateHashMap()).addOnSuccessListener(new OnSuccessListener<Void>() {

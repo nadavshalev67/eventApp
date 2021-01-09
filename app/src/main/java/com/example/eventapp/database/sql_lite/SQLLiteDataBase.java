@@ -58,6 +58,11 @@ public class SQLLiteDataBase extends SQLBase {
     }
 
     @Override
+    public void removeComment(String commentID) {
+
+    }
+
+    @Override
     public void insertEvent(String createdBy, Event event, SqlListener sqlListener) {
 
     }

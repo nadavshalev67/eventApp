@@ -22,6 +22,7 @@ public abstract class SQLBase {
 
     //public abstract void updateCurrencyForUser(String uuid, int i);
 
+
     public abstract void removeEvent(String id_document);
 
     public abstract void updateEvent(String id_document, Event event, FireStoreSql.SqlListener listener);
@@ -29,6 +30,8 @@ public abstract class SQLBase {
     public abstract void insertComment(Comment comment, FireStoreSql.SqlListener sqlListener);
 
     public abstract void getAllCommentsOfOneEvent(String event_id, SqlListenerComments listener);
+
+    public abstract void removeComment(String commentID);
 
 
     public interface SqlListener {

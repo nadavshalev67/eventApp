@@ -36,9 +36,8 @@ public class AllCommentActivity extends Activity implements SQLBase.SqlListenerC
         initViews();
         Bundle bundle = getIntent().getExtras();
         String id = bundle.getString("id");
-        SQLHolder.getInstance().getAllCommentsOfOneEvent(id,this);
+        SQLHolder.getInstance().getAllCommentsOfOneEvent(id, this);
     }
-
 
 
     private void initViews() {
