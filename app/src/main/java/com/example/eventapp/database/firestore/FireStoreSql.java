@@ -117,7 +117,7 @@ public class FireStoreSql extends SQLBase {
                         String currentCurrency = (String) task.getResult().get("amount_rejected_by_me");
                         int result = Integer.parseInt(currentCurrency) + 1;
                         HashMap<String, Object> objectHashMap = new HashMap<>();
-                        objectHashMap.put("amount_rejected_by_me", result);
+                        objectHashMap.put("amount_rejected_by_me", String.valueOf(result));
                         mDB.collection(USER_TABLE_NAME).document(uuid).update(objectHashMap);
                     }
                 });
