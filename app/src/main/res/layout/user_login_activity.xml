@@ -110,11 +110,12 @@
             android:typeface="sans" />
 
         <EditText
+
             android:id="@+id/password_edittxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:text="" />
 
         <Button
