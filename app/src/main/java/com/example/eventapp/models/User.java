@@ -3,7 +3,6 @@ package com.example.eventapp.models;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -25,6 +24,7 @@ public class User {
         this.email = email;
         this.uuid = uuid;
     }
+    public User(){}
 
     public User(String uuid, String email) {
         this.coins_aprroved_by_other_users_to_my_events = "0";
@@ -57,5 +57,61 @@ public class User {
         values.put("conis_from_my_approve_to_other_user", "0");
         values.put("email", this.email);
         return values;
+    }
+
+    public String getCoins_aprroved_by_other_users_to_my_events() {
+        return coins_aprroved_by_other_users_to_my_events;
+    }
+
+    public void setCoins_aprroved_by_other_users_to_my_events(String coins_aprroved_by_other_users_to_my_events) {
+        this.coins_aprroved_by_other_users_to_my_events = coins_aprroved_by_other_users_to_my_events;
+    }
+
+    public String getConis_from_my_approve_to_other_user() {
+        return conis_from_my_approve_to_other_user;
+    }
+
+    public void setConis_from_my_approve_to_other_user(String conis_from_my_approve_to_other_user) {
+        this.conis_from_my_approve_to_other_user = conis_from_my_approve_to_other_user;
+    }
+
+    public String getAmount_approved_by_me() {
+        return amount_approved_by_me;
+    }
+
+    public void setAmount_approved_by_me(String amount_approved_by_me) {
+        this.amount_approved_by_me = amount_approved_by_me;
+    }
+
+    public String getAmount_rejected_by_me() {
+        return amount_rejected_by_me;
+    }
+
+    public void setAmount_rejected_by_me(String amount_rejected_by_me) {
+        this.amount_rejected_by_me = amount_rejected_by_me;
+    }
+
+    public String getAmout_of_my_events() {
+        return amout_of_my_events;
+    }
+
+    public void setAmout_of_my_events(String amout_of_my_events) {
+        this.amout_of_my_events = amout_of_my_events;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

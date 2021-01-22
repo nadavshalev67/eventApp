@@ -3,7 +3,6 @@ package com.example.eventapp.database.sql_lite;
 import android.content.Context;
 
 import com.example.eventapp.database.SQLBase;
-import com.example.eventapp.database.sql_lite.SQLiteDB;
 import com.example.eventapp.models.Comment;
 import com.example.eventapp.models.Event;
 import com.example.eventapp.models.User;
@@ -28,6 +27,8 @@ public class SQLLiteDataBase extends SQLBase {
 
     @Override
     public void getAllUsers(SqlListenerUsers listener) {
+        List<User> list = sqLiteDB.getAllUsers();
+        listener.onGetAllUsers(list);
 
     }
 
@@ -38,17 +39,26 @@ public class SQLLiteDataBase extends SQLBase {
 
 
     @Override
-    public void removeEvent(String id_document) {
-
+    public void removeEvent(String id_documented) {
+        Event item = null;
+        if(sqLiteDB.readEvent(item.id_document).equals(id_documented)) {
+            sqLiteDB.deleteEvent(item);
+        }
     }
 
     @Override
     public void updateEvent(String id_document, Event event, SqlListener listener) {
 
+
     }
 
     @Override
     public void insertComment(Comment comment, SqlListener sqlListener) {
+        if(sqLiteDB != null){
+            sqLiteDB.addComment(comment);
+        }
+        sqlListener.onCompleteListener();
+
 
     }
 
@@ -59,6 +69,11 @@ public class SQLLiteDataBase extends SQLBase {
 
     @Override
     public void removeComment(String commentID) {
+        Comment item = null;
+        if(sqLiteDB.readComment(item.commentID).equals(commentID)){
+            sqLiteDB.deleteComment(item);
+
+        }
 
     }
 
@@ -70,11 +85,17 @@ public class SQLLiteDataBase extends SQLBase {
 
     @Override
     public void getAllEvents(SqlListenerEvents sqlListenerEvents) {
+        List<Event> list = sqLiteDB.getAllEvents();
+        sqlListenerEvents.onGetAllEvents(list);
+
 
     }
 
     @Override
     public void createUser(User user) {
+        if(sqLiteDB != null){
+
+        }
 
     }
 }

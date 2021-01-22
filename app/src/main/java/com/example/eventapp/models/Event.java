@@ -1,13 +1,10 @@
 package com.example.eventapp.models;
 
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,8 @@ public class Event implements Serializable {
     public Event(String event_adress, String event_description, String event_name, String level_of_risk, String url_of_pitcure, String user_id) {
         this(event_adress, new ArrayList<>(), event_description, event_name, level_of_risk, url_of_pitcure, new ArrayList<>(), user_id);
     }
+
+    public Event(){}
 
     public void setEventDocument(String id_document) {
         this.id_document = id_document;
@@ -80,5 +79,77 @@ public class Event implements Serializable {
         valuesMap.put("event_name", event_name);
         valuesMap.put("url_of_pitcure", url_of_pitcure);
         return valuesMap;
+    }
+
+    public String getEvent_adress() {
+        return event_adress;
+    }
+
+    public void setEvent_adress(String event_adress) {
+        this.event_adress = event_adress;
+    }
+
+    public List<String> getApproved_users_list() {
+        return approved_users_list;
+    }
+
+    public void setApproved_users_list(List<String> approved_users_list) {
+        this.approved_users_list = approved_users_list;
+    }
+
+    public String getEvent_description() {
+        return event_description;
+    }
+
+    public void setEvent_description(String event_description) {
+        this.event_description = event_description;
+    }
+
+    public String getEvent_name() {
+        return event_name;
+    }
+
+    public void setEvent_name(String event_name) {
+        this.event_name = event_name;
+    }
+
+    public String getLevel_of_risk() {
+        return level_of_risk;
+    }
+
+    public void setLevel_of_risk(String level_of_risk) {
+        this.level_of_risk = level_of_risk;
+    }
+
+    public String getUrl_of_pitcure() {
+        return url_of_pitcure;
+    }
+
+    public void setUrl_of_pitcure(String url_of_pitcure) {
+        this.url_of_pitcure = url_of_pitcure;
+    }
+
+    public List<String> getRejected_users_list() {
+        return rejected_users_list;
+    }
+
+    public void setRejected_users_list(List<String> rejected_users_list) {
+        this.rejected_users_list = rejected_users_list;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getId_document() {
+        return id_document;
+    }
+
+    public void setId_document(String id_document) {
+        this.id_document = id_document;
     }
 }

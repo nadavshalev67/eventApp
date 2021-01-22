@@ -19,6 +19,7 @@ public class Comment {
         this.email = email;
         commentID = "";
     }
+    public Comment(){}
 
     public Comment(String content, String eventIdrelated, String email, String commentID) {
         this.content = content;
@@ -42,5 +43,37 @@ public class Comment {
         valuesMap.put("eventIdrelated", eventIdrelated);
         valuesMap.put("email", email);
         return valuesMap;
+    }
+
+    public String getCommentID() {
+        return commentID;
+    }
+
+    public void setCommentID(String commentID) {
+        this.commentID = commentID;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getEventIdrelated() {
+        return eventIdrelated;
+    }
+
+    public void setEventIdrelated(String eventIdrelated) {
+        this.eventIdrelated = eventIdrelated;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
